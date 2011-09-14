@@ -1,0 +1,61 @@
+----------
+PolitiData
+----------
+
+OVERVIEW
+--------------------------------------------------------------------------------
+This is a simple script that will pull data on political candidates from the
+FEC's FTP site, then update a database with that info. How you use the data is
+up to you. The data file contains the following information about each candidate
+in a federal election (NOTE: this does not include local or regional elections):
+
+Candidate Identification
+Candidate Name
+Party Designation No. 1
+Party Designation No. 3
+Incumb./Challeng./Open-seat
+Candidate Status
+Street One
+Street Two
+City or Town
+State
+Zip Code
+Principal Campaign Comm. I.D.
+Year of Election
+Current District
+
+
+USE
+--------------------------------------------------------------------------------
+1) Place the script in a directory of your choice.
+2) Create a sub-directory named 'logs'.
+3) Update lines 16-19 with your database info
+4) In the database you defined in step 3, create a table named 'candidate' (or
+   change the 2 queries in the script to use the table name you choose) and use
+   this structure:
+   
+   1 	candidate_id       bigint(32)       //This isn't related to the FEC data
+   2 	fec_id             varchar(9)
+   3 	name_candidate     varchar(100)
+   4 	party_code         varchar(3)
+   5 	party_code2        varchar(3)
+   6 	cand_type          varchar(1)
+   7 	address1           varchar(50)
+   8 	address2           varchar(30)
+   9 	city               varchar(30)
+   10 	state              varchar(2)
+   11 	zip                varchar(10)
+   12 	election_year      varchar(2)
+   13 	district           varchar(2)
+   14 	date_created       datetime         //This isn't related to the FEC data
+   15 	date_modified      datetime         //This isn't related to the FEC data
+   16 	status_id          int(3)           //This isn't related to the FEC data
+5) That's it. Run it! The file is updated every Sunday according to the FEC site
+   so if you need ongoing updates you could set a cron job to run every Monday.
+6) Check the logs directory for details on each run (inserts vs updates) and/or
+   any errors it encountered.
+   
+LINKS
+--------------------------------------------------------------------------------
+Details on the FEC's files: http://www.fec.gov/finance/disclosure/ftpdet.shtml
+Details on the file layout: ftp://ftp.fec.gov/FEC/cn_dictionary.txt
