@@ -1,5 +1,5 @@
 CREATE TABLE `candidate` (
-  `candidate_id` bigint(32) DEFAULT NULL,
+  `candidate_id` bigint(32) unsigned NOT NULL AUTO_INCREMENT,
   `fec_id` varchar(9) DEFAULT NULL,
   `name_candidate` varchar(100) DEFAULT NULL,
   `party_code` varchar(3) DEFAULT NULL,
